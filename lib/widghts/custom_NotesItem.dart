@@ -36,7 +36,7 @@ class NotesItem extends StatelessWidget {
                 icon: const Icon(
                   Icons.delete,
                   color: Colors.black,
-                  size: 26,
+                  size: 30,
                 ),
               )),
               Padding(
