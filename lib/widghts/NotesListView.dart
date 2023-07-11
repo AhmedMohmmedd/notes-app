@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import 'custom_NotesItem.dart';
+import 'NotesItem.dart';
 
 class NotesListView extends StatelessWidget {
   const NotesListView({super.key});
