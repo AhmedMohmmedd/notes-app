@@ -5,14 +5,24 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import '../constens.dart';
 
 class CustomTextFiled extends StatelessWidget {
-  const CustomTextFiled({super.key, required this.hint,  this.maxline = 1});
+  const CustomTextFiled(
+      {super.key, required this.hint, this.maxline = 1, this.onSaved});
   final String hint;
   final int maxline;
+  final void Function(String?)? onSaved;
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      onSaved: onSaved,
+      validator: (value) {
+        if (value?.isEmpty ?? true) {
+          return 'feild is rquired';
+        } else {
+          return null;
+        }
+      },
       cursorColor: KprimaryColor,
-      maxLines: maxline ,
+      maxLines: maxline,
       decoration: InputDecoration(
         hintText: hint,
         hintStyle: TextStyle(color: KprimaryColor),
