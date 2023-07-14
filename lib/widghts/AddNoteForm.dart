@@ -6,6 +6,7 @@ import 'package:notesapp/models/note_model.dart';
 import '../cubits/add_note_cubit/add_note_cubit.dart';
 import 'customBottn.dart';
 import 'custom_textfiled.dart';
+import 'package:intl/intl.dart';
 
 class AddNoteForm extends StatefulWidget {
   const AddNoteForm({
@@ -52,26 +53,30 @@ class _AddNoteFormState extends State<AddNoteForm> {
           const SizedBox(
             height: 32,
           ),
-          BlocBuilder<AddNoteCubit , AddNoteState>(
-            builder: (context, state) {
+          BlocBuilder<AddNoteCubit, AddNoteState>(builder: (context, state) {
             return customButtom(
               isLoding: state is AddNoteILoding ? true : false,
               onTap: () {
                 if (formKey.currentState!.validate()) {
                   formKey.currentState!.save();
+
+                  var curentDate = DateTime.now();
+                  var formatcurentDate =
+                      DateFormat('dd-M-yyyy   H.m').format(curentDate);
+
                   var noteModel = NoteModel(
                       title: title!,
                       subTitle: subTitle!,
-                      date: DateTime.now().toString(),
+                      date: formatcurentDate,
                       color: Colors.blue.value);
                   BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
                 } else {
                   autovalidateMode = AutovalidateMode.always;
                   setState(() {});
                 }
-              },);
-            
-  }),
+              },
+            );
+          }),
           const SizedBox(
             height: 16,
           ),
